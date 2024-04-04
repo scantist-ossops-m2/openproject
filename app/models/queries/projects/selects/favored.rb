@@ -26,14 +26,16 @@
 # See COPYRIGHT and LICENSE files for more details.
 # ++
 
-class Queries::Projects::Selects::Default < Queries::Selects::Base
-  KEYS = %i[status_explanation hierarchy name starred public description].freeze
-
+class Queries::Projects::Selects::Favored < Queries::Selects::Base
   def self.key
-    Regexp.new(KEYS.join("|"))
+    :favored
   end
 
-  def self.all_available
-    KEYS.map { new(_1) }
+  def self.available?
+    true
+  end
+
+  def caption
+    I18n.t(:label_favoured)
   end
 end
